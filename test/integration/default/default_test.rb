@@ -5,14 +5,18 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+# This is an example test, replace it with your own test.
+describe package("rbenv") do
+  it {should be_installed}
+  its("version") {should match /2\./}
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe package("ruby") do
+  it {should be_installed}
+  its("version") {should match /2\.4\.5/}
+end
+
+describe gem("rails") do
+  it {should be_installed}
+  its("version") {should match /2\.5\.1/}
 end

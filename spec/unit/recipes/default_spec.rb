@@ -19,6 +19,12 @@ describe 'rails::default' do
       expect { chef_run }.to_not raise_error
     end
 
+    ['git-core', 'curl', 'zlib1g-dev', 'build-essential', 'libssl-dev', 'libreadline-dev', 'libyaml-dev,' 'libsqlite3-dev', 'sqlite3', 'libxml2-dev', 'libxslt1-dev', 'libcurl4-openssl-dev', 'software-properties-common', 'libffi-dev', 'nodejs', 'yarn'].each do |p|
+      it "should install dependencies" do
+        expect(chef_run).to install_package(p)
+      end
+    end
+
     it "should install rbenv" do
       expect(chef_run).to install_package("rbenv")
     end
