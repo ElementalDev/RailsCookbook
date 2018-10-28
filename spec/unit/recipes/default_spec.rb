@@ -20,7 +20,7 @@ describe 'rails::default' do
     end
 
     ['git-core', 'curl', 'zlib1g-dev', 'build-essential', 'libssl-dev', 'libreadline-dev', 'libyaml-dev,' 'libsqlite3-dev', 'sqlite3', 'libxml2-dev', 'libxslt1-dev', 'libcurl4-openssl-dev', 'software-properties-common', 'libffi-dev', 'nodejs', 'yarn'].each do |p|
-      it "should install dependencies" do
+      it "should install #{p}" do
         expect(chef_run).to install_package(p)
       end
     end
