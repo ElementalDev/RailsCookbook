@@ -25,8 +25,8 @@ describe 'rails::default' do
       end
     end
 
-    it "should add rbenv repo" do
-      expect(chef_run).to add_apt_repository("rbenv")
+    it "should add dependency repo" do
+      expect(chef_run).to add_apt_repository("dependencies")
     end
 
     it "update resources" do
