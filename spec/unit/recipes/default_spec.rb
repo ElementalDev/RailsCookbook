@@ -29,20 +29,34 @@ describe 'rails::default' do
       expect(chef_run).to add_apt_repository("dependencies")
     end
 
-    it "update resources" do
+    it "should update resources" do
       expect(chef_run).to update_apt_update("update")
     end
 
-    it "should install rbenv" do
-      expect(chef_run).to install_package("rbenv")
+    it "should sync the rbenv git repo" do
+      expect(chef_run).to sync_git("rbenv")
     end
 
-    it "should install ruby" do
-      expect(chef_run).to rbenv_system_install("ruby-2.4.0")
+    it "should sync the ruby-build git repo" do
+      expect(chef_run).to sync_git("ruby-build")
     end
 
-    it "should install rails" do
-      expect(chef_run).to install_gem_package("rails")
+    it "execute commands for rbenv and ruby-build" do
+      expect(chef_run).to run_execute("add_rbenv_and_ruby-build")
+    end
+
+    it "execute commands for installing ruby" do
+      expect(chef_run).to run_execute("install_and_globalise_ruby")
+    end
+
+    ['bundler', 'rails'].each do |g|
+      it "should install #{g}" do
+        expect(chef_run).to install_gem_package(g)
+      end
+    end
+
+    it "execute command 'rbenv rehash'" do
+      expect(chef_run).to run_execute("rbenv_rehash")
     end
   end
 end
