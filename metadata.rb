@@ -19,4 +19,4 @@ chef_version '>= 13.0'
 #
 # source_url 'https://github.com/<insert_org_here>/rails'
 
-depends("nodejs", "~> 8.0.0")
+depends("nodejs", "~> 5.0.0")
